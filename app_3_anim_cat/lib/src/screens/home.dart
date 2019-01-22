@@ -35,7 +35,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
     boxAnimation = Tween(begin: pi * 0.6, end: pi * 0.65).animate(
       CurvedAnimation(
         parent: boxController,
-        curve: Curves.linear,
+        curve: Curves.easeInOut,
       ),
     );
     boxAnimation.addStatusListener((AnimationStatus status) {

@@ -4,7 +4,11 @@ import '../models/item_model.dart';
 
 class NewsApiProvider {
   final _apiRoot = 'https://hacker-news.firebaseio.com/v0';
-  final Client client = Client();
+  Client client = Client();
+
+  NewsApiProvider([Client client]) {
+    this.client = (client != null) ? client : Client();
+  }
 
   fetchTopIds() async {
     final response = await client.get('$_apiRoot/topstories.json');

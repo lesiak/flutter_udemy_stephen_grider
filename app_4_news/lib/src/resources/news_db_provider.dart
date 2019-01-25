@@ -4,8 +4,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import '../models/item_model.dart';
+import 'package:app_4_news/src/resources/item_model_repository.dart';
 
-class NewsDbProvider {
+class NewsDbProvider implements Source, Cache {
   Database db;
 
   void init() async {
@@ -35,6 +36,13 @@ class NewsDbProvider {
         ''');
       },
     );
+  }
+
+
+  @override
+  Future<List<int>> fetchTopIds() {
+    //TODO: store and fetch top ids
+    return null;
   }
 
   Future<ItemModel> fetchItem(int id) async {

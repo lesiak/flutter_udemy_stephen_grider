@@ -38,7 +38,6 @@ class NewsDbProvider implements Source, Cache {
     );
   }
 
-
   @override
   Future<List<int>> fetchTopIds() {
     //TODO: store and fetch top ids
@@ -46,7 +45,8 @@ class NewsDbProvider implements Source, Cache {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    List<Map<String, dynamic>> maps = await db.query('Items',
+    List<Map<String, dynamic>> maps = await db.query(
+      'Items',
       columns: null,
       where: "id = ?",
       whereArgs: [id],
@@ -60,6 +60,10 @@ class NewsDbProvider implements Source, Cache {
   }
 
   Future<int> addItem(ItemModel item) {
-    return db.insert('Items', item.toMapForDb());
+    return db.insert(
+      'Items',
+      item.toMapForDb(),
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 }

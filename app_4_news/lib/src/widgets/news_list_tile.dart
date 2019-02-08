@@ -14,16 +14,18 @@ class NewsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
 
-    return StreamBuilder<Map<int, Future<ItemModel>>> (
+    return StreamBuilder<Map<int, Future<ItemModel>>>(
       stream: bloc.items,
-      builder: (BuildContext context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+      builder: (BuildContext context,
+          AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         if (!snapshot.hasData) {
           return Text('Stream still loading');
         }
 
         return FutureBuilder(
           future: snapshot.data[itemId],
-          builder: (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!itemSnapshot.hasData) {
               return Text('Still loading item $itemId');
             }
@@ -35,9 +37,22 @@ class NewsListTile extends StatelessWidget {
   }
 
   Widget buildTile(ItemModel item) {
-    return ListTile(
-      title: Text(item.title),
-      subtitle: Text('${item.score} points'),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(item.title),
+          subtitle: Text('${item.score} points'),
+          trailing: Column(
+            children: <Widget>[
+              Icon(Icons.comment),
+              Text('${item.descendants}')
+            ],
+          ),
+        ),
+        Divider(
+          height: 8.0
+        ),
+      ],
     );
   }
 }

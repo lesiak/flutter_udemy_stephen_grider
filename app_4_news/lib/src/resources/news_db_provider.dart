@@ -32,7 +32,7 @@ class NewsDbProvider implements Source, Cache {
             score INTEGER,
             title TEXT,
             descendants INTEGER
-          )
+          );
         ''');
       },
     );

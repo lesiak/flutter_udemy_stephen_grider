@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../blocs/stories_provider.dart';
 import '../models/item_model.dart';
+import './loading_list_tile.dart';
 
 class NewsListTile extends StatelessWidget {
   final int itemId;
@@ -19,7 +20,7 @@ class NewsListTile extends StatelessWidget {
       builder: (BuildContext context,
           AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         if (!snapshot.hasData) {
-          return Text('Stream still loading');
+          return LoadingListTile(); //Stream still loading
         }
 
         return FutureBuilder(
@@ -27,7 +28,7 @@ class NewsListTile extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!itemSnapshot.hasData) {
-              return Text('Still loading item $itemId');
+              return LoadingListTile(); //Still loading item $itemId
             }
             return buildTile(itemSnapshot.data);
           },
@@ -50,7 +51,7 @@ class NewsListTile extends StatelessWidget {
           ),
         ),
         Divider(
-          height: 8.0
+          height: 8.0,
         ),
       ],
     );

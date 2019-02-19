@@ -21,9 +21,13 @@ class StoriesBloc {
     _itemsFetcher.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
   }
 
-  void fetchTopIds() async {
+  Future<void> fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
+  }
+
+  Future<void> clearCache() {
+    return _repository.clearCache();
   }
 
   StreamTransformer<int, Map<int, Future<ItemModel>>> _itemsTransformer() {

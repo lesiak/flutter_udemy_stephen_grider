@@ -61,3 +61,5 @@ abstract class Cache {
 
   Future<int> clear();
 }
+
+final ItemModelRepository itemModelRepositoryInstance = ItemModelRepository();

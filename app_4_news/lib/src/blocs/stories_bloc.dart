@@ -4,7 +4,7 @@ import '../models/item_model.dart';
 import '../resources/item_model_repository.dart';
 
 class StoriesBloc {
-  final _repository = ItemModelRepository();
+  final _repository = itemModelRepositoryInstance;
   final _topIds = PublishSubject<List<int>>();
   final _itemsFetcher = PublishSubject<int>();
   final _itemsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();

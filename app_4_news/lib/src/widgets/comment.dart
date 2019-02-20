@@ -9,7 +9,8 @@ class Comment extends StatelessWidget {
 
   final int depth;
 
-  const Comment({Key key, this.itemId, this.itemMap, this.depth}) : super(key: key);
+  const Comment({Key key, this.itemId, this.itemMap, this.depth})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,9 @@ class Comment extends StatelessWidget {
         var item = snapshot.data;
         final children = <Widget>[
           ListTile(
-            title: Text(item.text),
+            title: buildText(item),
             subtitle: item.by != null ? Text(item.by) : Text('deleted'),
-            contentPadding: EdgeInsets.only(
-              right: 16.0,
-              left: 16.0 * depth
-            ),
+            contentPadding: EdgeInsets.only(right: 16.0, left: 16.0 * depth),
           ),
           Divider(),
         ];
@@ -44,5 +42,15 @@ class Comment extends StatelessWidget {
         );
       },
     );
+  }
+
+  Text buildText(ItemModel item) {
+    final text = item.text
+        .replaceAll('&#x27;', "'")
+        .replaceAll('&gt;', '>')
+        .replaceAll('&lt;', '<')
+        .replaceAll('<p>', '\n\n');
+
+    return Text(text);
   }
 }

@@ -7,12 +7,6 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
-
-    //This is bad!!! Temporary!!!
-    //Build can be called multiple times
-    //only work because callbacks change the child of this widget, not the widget itself
-    bloc.fetchTopIds();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Top News'),

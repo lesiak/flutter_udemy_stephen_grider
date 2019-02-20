@@ -33,7 +33,7 @@ class ItemModelRepository {
       ItemModel item = await source.fetchItem(id);
       if (item != null) {
         for (var cache in caches) {
-          if ((cache as Source) != source) {
+          if (cache != source) {
             cache.addItem(item);
           }
         }
@@ -56,7 +56,7 @@ abstract class Source {
   Future<ItemModel> fetchItem(int id);
 }
 
-abstract class Cache {
+abstract class Cache extends Source {
   Future<int> addItem(ItemModel item);
 
   Future<int> clear();
